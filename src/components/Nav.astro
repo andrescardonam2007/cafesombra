@@ -1,0 +1,57 @@
+---
+// Site navigation: brand + anchors to the main sections. No JavaScript.
+---
+
+<header class="barra">
+  <div class="barra-inner">
+    <a class="marca" href="#inicio">Oropéndola</a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#origen">Origen</a>
+      <a href="#pedido">Pedido</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .barra {
+    border-block-end: 1px solid var(--color-pulpa);
+    background-color: var(--color-cal);
+  }
+
+  .barra-inner {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    margin-inline: auto;
+    max-width: 72rem;
+    padding: 1rem 1.25rem;
+  }
+
+  .marca {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--color-bosque);
+    text-decoration: none;
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+  }
+
+  .nav a {
+    color: var(--color-bosque);
+    text-decoration: none;
+    padding: 0.25rem 0.125rem;
+    border-block-end: 2px solid transparent;
+  }
+
+  .nav a:hover {
+    border-block-end-color: var(--color-yema);
+  }
+</style>
