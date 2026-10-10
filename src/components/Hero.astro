@@ -1,0 +1,153 @@
+---
+// Hero: the farm's one memorable moment — the oropéndola and its hanging nest,
+// drawn inline so the page carries no remote assets.
+---
+
+<section id="inicio" class="hero">
+  <div class="hero-grid hero-reveal">
+    <h1 class="hero-titulo">Café de sombra, cultivado a 1.900 m sobre el suroeste antioqueño</h1>
+
+    <div class="hero-figura">
+      <svg
+        viewBox="0 0 520 400"
+        xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-label="Ilustración de una oropéndola posada en la rama de un árbol de sombra, junto a su nido colgante tejido con fibras"
+      >
+        <!-- Ram -->
+        <path
+          d="M 24 96 C 130 82, 300 88, 498 64"
+          fill="none"
+          stroke="var(--color-bosque)"
+          stroke-width="7"
+          stroke-linecap="round"
+        />
+        <!-- Hojas -->
+        <path d="M 132 84 q 18 -22 36 -10 q -4 18 -22 22 z" fill="var(--color-pulpa)" />
+        <path d="M 430 70 q 20 -24 40 -12 q -4 20 -22 24 z" fill="var(--color-pulpa)" />
+        <path d="M 62 90 q 12 -16 28 -8 q -2 14 -16 16 z" fill="var(--color-bosque)" />
+
+        <!-- Nido colgante -->
+        <path
+          d="M 350 78 C 347 104, 353 126, 350 146"
+          fill="none"
+          stroke="var(--color-bosque)"
+          stroke-width="3"
+        />
+        <path
+          d="M 350 146 C 394 160, 414 188, 414 222 C 414 268, 390 302, 350 302 C 310 302, 286 268, 286 222 C 286 188, 306 160, 350 146 Z"
+          fill="var(--color-flor)"
+          stroke="var(--color-pulpa)"
+          stroke-width="3"
+        />
+        <ellipse cx="350" cy="164" rx="13" ry="9" fill="var(--color-bosque)" />
+        <path
+          d="M 322 196 Q 350 212 378 196 M 312 236 Q 350 254 388 236 M 318 272 Q 350 288 382 272"
+          fill="none"
+          stroke="var(--color-pulpa)"
+          stroke-width="2"
+          stroke-dasharray="3 5"
+          opacity="0.85"
+        />
+
+        <!-- Oropéndola -->
+        <path d="M 198 82 L 196 88 M 216 82 L 218 88" stroke="var(--color-bosque)" stroke-width="3" />
+        <ellipse cx="207" cy="56" rx="30" ry="23" fill="var(--color-yema)" />
+        <circle cx="234" cy="42" r="15" fill="var(--color-yema)" />
+        <path d="M 184 50 C 195 36, 230 38, 238 58 C 222 78, 192 74, 184 50 Z" fill="var(--color-bosque)" />
+        <path d="M 180 66 L 148 110 L 186 84 Z" fill="var(--color-bosque)" />
+        <ellipse cx="239" cy="41" rx="7" ry="8" fill="var(--color-bosque)" />
+        <circle cx="236" cy="40" r="2.6" fill="var(--color-flor)" />
+        <circle cx="236.6" cy="39.5" r="1.2" fill="var(--color-bosque)" />
+        <path d="M 247 36 L 284 46 L 244 50 Z" fill="var(--color-bosque)" />
+      </svg>
+    </div>
+
+    <div class="hero-acciones">
+      <a class="cta" href="#catalogo">Ver el catálogo</a>
+      <p class="hero-contexto">Finca La Esperanza · Jardín, Antioquia</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 2.5rem 1.25rem 4rem;
+  }
+
+  .hero-grid {
+    display: grid;
+    gap: 2rem;
+    margin-inline: auto;
+    max-width: 72rem;
+    align-items: center;
+  }
+
+  .hero-titulo {
+    font-size: clamp(2.1rem, 5vw + 1rem, 3.6rem);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .hero-figura svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 30rem;
+    margin-inline: auto;
+  }
+
+  .hero-acciones {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.875rem;
+  }
+
+  .cta {
+    display: inline-block;
+    background-color: var(--color-yema);
+    color: var(--color-bosque);
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+
+  .cta:hover {
+    background-color: color-mix(in srgb, var(--color-yema) 88%, var(--color-bosque));
+  }
+
+  .hero-contexto {
+    margin: 0;
+    color: var(--color-bosque);
+  }
+
+  /* Escritorio: copy a la izquierda, ave a la derecha. */
+  @media (min-width: 64rem) {
+    .hero {
+      padding-block: 4rem 6rem;
+    }
+
+    .hero-grid {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: 3rem;
+    }
+
+    .hero-titulo {
+      grid-column: 1 / 8;
+    }
+
+    .hero-figura {
+      grid-column: 8 / 13;
+      grid-row: 1 / 3;
+    }
+
+    .hero-acciones {
+      grid-column: 1 / 8;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 1.5rem;
+    }
+  }
+</style>
