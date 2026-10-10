@@ -59,10 +59,12 @@ Complete!`. `dist/index.html`: `lang="es-CO"`, 1×`<h1>` + 3×`<h2>`, IDs
 - **Skill `frontend-design` (scope del proyecto):** aplicada en la Etapa 2 para el plan
   de diseño (paleta, tipografía, layout, principios) y la auto-crítica contra los
   tells de plantilla/AI; el resultado quedó registrado en `02-propuesta.md` §2.5.
-- **Context7 / fuentes primarias:** para verificar APIs y convenciones actuales de
-  Astro 7 y Tailwind v4 (CSS-first, `@theme`, islas `<script>`) se consultaron las
-  documentaciones oficiales en lugar de asumir desde conocimiento previo, evitando
-  romper el build con config de v3.
+- **Context7 (herramienta disponible):** Context7 estaba configurado entre las
+  herramientas del proyecto para consultar la documentación de Astro y Tailwind. No hay
+  evidencia registrada de consultas a Context7 en etapas concretas, así que no se
+  afirma que se haya usado en alguna; la preocupación por Tailwind v4 CSS-first (tokens
+  en `@theme`, sin `tailwind.config.js`) sí quedó documentada como riesgo en
+  `01-exploration.md`.
 - **Islas `<script>` vanilla:** la interactividad (filtro, «Agregar», validación) se
   mantuvo sin framework, minimizando superficie de contexto y dependencias.
 
