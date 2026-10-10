@@ -2,7 +2,7 @@
 
 Feature: **Oropéndola — Café de Origen** (`cafe-origen`)
 Modo de entrega: `single-pr`
-Estado: **T-01 a T-12 implementadas** (rama `feature/cafe-origen-landing`); pendiente Etapa 4 y Etapas 6–7
+Estado: **T-01 a T-14 completas** (rama `feature/cafe-origen-landing`); flujo cerrado (etapas 4, 6 y 7 completas)
 
 ---
 
@@ -119,11 +119,11 @@ T-08 (Agregar)  depende de  T-10 (formulario con <select> de productos)
     `aria` de los controles.
   - **Artefactos:** ajustes en los componentes.
   - **Verificación:** navegación por teclado y revisión a 360px / 768px / 1280px.
-- [ ] **T-13 — Verificación (Etapa 6)**
+- [x] **T-13 — Verificación (Etapa 6)**
   - **Qué:** `npm run build` sin errores; chequeos de los criterios de aceptación.
   - **Artefactos:** registro de verificación en `specs/cafe-origen/06-verificacion.md`
-  - **Verificación:** build verde + criterios observados.
-- [ ] **T-14 — Documentación (Etapa 7)**
+  - **Verificación:** build verde + criterios observados (10/10 + 10/10).
+- [x] **T-14 — Documentación (Etapa 7)**
   - **Qué:** `README.md` con descripción, secciones, cómo correr (`dev`/`build`) y
     decisiones de diseño; cierre de los specs.
   - **Artefactos:** `README.md`, `specs/cafe-origen/07-documentacion.md`
@@ -139,7 +139,7 @@ Una tarea se marca `[x]` solo cuando:
 2. Su verificación se observó (no se infiere).
 3. Se incluyó en un commit por unidad de trabajo en la rama de feature.
 
-## Registro de avance (T-01 … T-12)
+## Registro de avance (T-01 … T-14)
 
 Rama: `feature/cafe-origen-landing`. Base: `1fb1adc` (chore: scaffold). Un commit por unidad.
 
@@ -157,12 +157,16 @@ Rama: `feature/cafe-origen-landing`. Base: `1fb1adc` (chore: scaffold). Un commi
 | T-10 | `3c974fa` | feat(order): add validated order form with simulated confirmation |
 | T-11 | `bf6ed0e` | feat(page): assemble landing sections in index |
 | T-12 | `7aab4f7` | refactor(catalog): hide filtered list items for a cleaner a11y tree |
+| T-13 | `e533503` | docs(specs): add Etapa 6 verification results |
+| T-14 | `3498078`, `b1e8149` | docs(readme): rewrite README in Spanish · docs(specs): add Etapa 7 documentation record |
 
-**Evidencia de verificación (preliminar, repetida en Etapa 6):**
-`npm run build` → `1 page(s) built … Complete!` (sin errores). HTML generado contiene:
-`lang="es-CO"`, un solo `<h1>`, tres `<h2>`, IDs `contenido`/`catalogo`/`origen`/`pedido`,
-6 fichas, 6 botones «Agregar», 6 `<details>`, `select#producto` y `aria-live="polite"`.
+**Evidencia de verificación (definitiva en Etapa 6, `06-verificacion.md`):**
+`npm run build` → `1 page(s) built in 901ms … Complete!` (sin errores). HTML generado
+contiene: `lang="es-CO"`, un solo `<h1>`, tres `<h2>`, IDs
+`contenido`/`inicio`/`catalogo`/`origen`/`pedido`, 6 fichas, 6 botones «Agregar», 6
+`<details>`, `select#producto`, 4 botones con `aria-pressed` y `aria-live="polite"`.
 Sin recursos remotos (el único `http://` es el namespace `http://www.w3.org/2000/svg`).
+Criterios de aceptación 10/10 y requisitos RF/RNF 10/10: **cumplen**.
 
 ## Próxima etapa
 
