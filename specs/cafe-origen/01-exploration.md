@@ -1,83 +1,87 @@
-# Stage 1 — Exploration
+# Etapa 1 — Exploración
 
-Feature: **Coffee Origin Landing** (`cafe-origen`)
-Delivery mode: `single-pr`
-Status: awaiting approval at the Stage 1 gate
+Feature: **Café de Origen** (`cafe-origen`)
+Modo de entrega: `single-pr`
+Estado: en espera de aprobación en el portón de la Etapa 1
 
-## Objective
+## Objetivo
 
-Build an interactive, modern landing page for a local single-origin coffee shop,
-with four sections (hero, product catalog, origin story, contact/order form),
-using Astro + Tailwind only, no extra dependencies and no remote images.
+Construir una landing page interactiva y moderna para una cafetería local de origen,
+con cuatro secciones (hero, catálogo de productos, historia de origen, formulario de
+contacto/pedido), usando únicamente Astro + Tailwind, sin dependencias adicionales y
+sin imágenes remotas.
 
-## Current project state (evidence)
+## Estado actual del proyecto (evidencia)
 
 - `package.json` — Astro `^7.3.8`, Tailwind `^4.3.3`, `@tailwindcss/vite ^4.3.3`.
   `type: module`, `engines.node >= 22.12.0`. Scripts: `dev`, `build`, `preview`, `astro`.
-- `astro.config.mjs` — Tailwind wired through the Vite plugin. No integrations.
-- `src/pages/index.astro` — untouched Astro starter: `<h1>Astro</h1>`, `lang="en"`.
-- `src/styles/global.css` — single line: `@import "tailwindcss";`.
-- `src/components/`, `src/data/`, `src/content/` — do not exist yet.
-- `public/` — only `favicon.ico` and `favicon.svg`.
-- No image assets; per brief, visuals must be SVG / gradients / emojis.
-- Git: repository initialized, **no commits yet**. Starter files are staged;
-  the Tailwind edits (`astro.config.mjs`, `package.json`, lockfile) and
-  `src/styles/` are not staged. `master` is the only branch.
-- Docs `README.md`, `AGENTS.md`, `CLAUDE.md` are the Astro default templates (English).
+- `astro.config.mjs` — Tailwind conectado a través del plugin de Vite. Sin integraciones.
+- `src/pages/index.astro` — starter de Astro sin tocar: `<h1>Astro</h1>`, `lang="en"`.
+- `src/styles/global.css` — una sola línea: `@import "tailwindcss";`.
+- `src/components/`, `src/data/`, `src/content/` — todavía no existen.
+- `public/` — solo `favicon.ico` y `favicon.svg`.
+- Sin assets de imagen; según el brief, los visuales deben ser SVG / degradados / emojis.
+- Git: repositorio inicializado, **sin commits todavía**. Los archivos del starter están
+  en stage; las ediciones de Tailwind (`astro.config.mjs`, `package.json`, lockfile) y
+  `src/styles/` no están en stage. `master` es la única rama.
+- Documentos `README.md`, `AGENTS.md`, `CLAUDE.md`: plantillas por defecto de Astro (inglés).
 
-## Skills in play
+## Skills en juego
 
-- `frontend-design` (project scope):
+- `frontend-design` (scope del proyecto):
   `C:\Users\Cardona\Downloads\proyecto-sdd\.agents\skills\frontend-design\SKILL.md`
-  Required behavior: produce a compact design plan (color, type, layout, principles),
-  review it against the brief for templated/AI tells, then build. Avoid the known
-  defaults (cream `#F4F1EA` + terracotta, all-caps eyebrows, middle-dot meta strings,
-  identical rounded cards, fade-and-slide on every section).
-- No SDD skill is installed on disk. The 7-stage flow is the one defined by the user.
+  Comportamiento requerido: producir un plan de diseño compacto (color, tipografía,
+  layout, principios), revisarlo contra el brief para detectar tells de plantilla/AI y
+  después construir. Evitar los defaults conocidos (crema `#F4F1EA` + terracota,
+  eyebrows en MAYÚSCULAS, strings meta con punto medio, tarjetas redondeadas idénticas,
+  fade-and-slide en todas las secciones).
+- No hay skill de SDD instalada en disco. El flujo de 7 etapas es el definido por el usuario.
 
-## Constraints (from the brief)
+## Restricciones (del brief)
 
-1. Astro + Tailwind only — **no extra dependencies**.
-2. **No remote images** — visuals via inline SVG, gradients, or emojis.
-3. Mobile-first responsive layout.
-4. Semantic HTML and basic accessibility (landmarks, labels, focus, reduced motion).
-5. One Astro component per section, kept separate.
-6. The 6-product catalog data lives in a **separate file**.
-7. Contact/order form with **client-side validation** and a **simulated** confirmation
-   (no backend).
-8. Verification runs `npm run build`.
-9. Delivery as a **single PR**.
+1. Solo Astro + Tailwind — **sin dependencias adicionales**.
+2. **Sin imágenes remotas** — visuales mediante SVG inline, degradados o emojis.
+3. Layout responsive mobile-first.
+4. HTML semántico y accesibilidad básica (landmarks, labels, foco, reduced motion).
+5. Un componente Astro por sección, mantenidos separados.
+6. Los datos del catálogo de 6 productos viven en un **archivo aparte**.
+7. Formulario de contacto/pedido con **validación en el cliente** y una confirmación
+   **simulada** (sin backend).
+8. La verificación corre `npm run build`.
+9. Entrega como **un solo PR**.
 
-## Sections to deliver
+## Secciones a entregar
 
-| # | Section | Notes |
+| # | Sección | Notas |
 | - | ------- | ----- |
-| 1 | Hero | First impression; distinctive, not the generic big-number treatment |
-| 2 | Product catalog | 6 products, data in a separate module |
-| 3 | Origin | Farm story + process map / timeline rendered as cards |
-| 4 | Contact / order | Client-validated form + simulated confirmation message |
+| 1 | Hero | Primera impresión; distintivo, no el tratamiento genérico de número grande |
+| 2 | Catálogo de productos | 6 productos, datos en un módulo aparte |
+| 3 | Origen | Historia de la finca + mapa/línea del proceso renderizada como pasos |
+| 4 | Contacto / pedido | Formulario validado en el cliente + mensaje de confirmación simulado |
 
-## Risks and watch items
+## Riesgos y puntos de atención
 
-- **Tailwind v4 is CSS-first.** There is no `tailwind.config.js`; design tokens must
-  live in `global.css` via `@theme`. Assuming v3 config will break the build.
-- **Astro 7** — verify no removed/renamed APIs when scaffolding components/pages.
-- **"Interactive" without a framework.** Interactivity must be small vanilla `<script>`
-  islands (form validation, any reveal). No React/Vue/Svelte (extra dependency).
-- **Accessibility of simulated feedback.** The confirmation and validation errors need
-  `aria-live` / associated error text, not just color.
-- **Generic-design trap.** The obvious coffee palette (cream + brown) and the SaaS
-  card kit are exactly the defaults `frontend-design` warns against; the plan must
-  make deliberate, non-default choices.
+- **Tailwind v4 es CSS-first.** No hay `tailwind.config.js`; los tokens de diseño deben
+  vivir en `global.css` vía `@theme`. Asumir la config de v3 romperá el build.
+- **Astro 7** — verificar que no haya APIs removidas/renombradas al construir
+  componentes o páginas.
+- **«Interactivo» sin framework.** La interactividad debe ser pequeñas islas
+  `<script>` vanilla (validación del formulario, cualquier reveal). Nada de
+  React/Vue/Svelte (dependencia adicional).
+- **Accesibilidad del feedback simulado.** La confirmación y los errores de validación
+  necesitan `aria-live` / texto de error asociado, no solo color.
+- **Trampa del diseño genérico.** La paleta obvia de café (crema + marrón) y el kit de
+  tarjetas SaaS son exactamente los defaults contra los que advierte `frontend-design`;
+  el plan debe tomar decisiones deliberadas y no-default.
 
-## Open questions (to resolve at the Stage 2 gate, not now)
+## Preguntas abiertas (para resolver en el portón de la Etapa 2, no ahora)
 
-- **Concrete brand identity** — name, region, and story hook. The brief says
-  "local origin" but does not name the shop; a concrete identity will be proposed.
-- **Copy language** — the target audience is local Spanish-speaking customers, so
-  Spanish UI copy is the default assumption; to be confirmed.
+- **Identidad de marca concreta** — nombre, región y gancho de historia. El brief dice
+  «origen local» pero no nombra la tienda; se propondrá una identidad concreta.
+- **Idioma del copy** — el público objetivo son clientes locales de habla hispana, así
+  que el copy de la UI en español es el supuesto por defecto; a confirmar.
 
-## Next stage
+## Próxima etapa
 
-Stage 2 — Proposal: design plan (palette, typography, ASCII wireframes, principles),
-component architecture, in/out of scope, and acceptance criteria.
+Etapa 2 — Propuesta: plan de diseño (paleta, tipografía, wireframes ASCII, principios),
+arquitectura de componentes, alcance (incluye/no incluye) y criterios de aceptación.

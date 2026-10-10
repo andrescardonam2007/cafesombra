@@ -1,0 +1,148 @@
+---
+// Catalog: the six coffees of the season, filterable by roast.
+// "Agregar" selects the product in the order form and moves the view there.
+import { productos } from '../data/productos';
+import FichaProducto from './FichaProducto.astro';
+
+const tuestes = [
+  { id: 'claro', nombre: 'Claro' },
+  { id: 'medio', nombre: 'Medio' },
+  { id: 'oscuro', nombre: 'Oscuro' },
+] as const;
+---
+
+<section id="catalogo" class="catalogo">
+  <h2 class="catalogo-titulo">Catálogo</h2>
+  <p class="catalogo-intro">{productos.length} granos de la cosecha actual</p>
+
+  <div class="filtros" role="group" aria-label="Filtrar por tueste">
+    <button class="filtro" type="button" data-filtro="" aria-pressed="true">Todos</button>
+    {tuestes.map((tueste) => (
+      <button class="filtro" type="button" data-filtro={tueste.id} aria-pressed="false">
+        {tueste.nombre}
+      </button>
+    ))}
+  </div>
+
+  <p id="estado-vacio" class="estado-vacio" hidden>
+    Esta cosecha no tiene granos con ese tueste. Vuelve a «Todos» para ver el catálogo completo.
+  </p>
+
+  <ul class="fichas">
+    {productos.map((producto) => (
+      <li class="ficha-item" data-tueste={producto.tueste}>
+        <FichaProducto producto={producto} />
+      </li>
+    ))}
+  </ul>
+</section>
+
+<script>
+  // --- Roast filter: show/hide rows, reflect state in aria-pressed ---
+  const botonesFiltro = Array.from(
+    document.querySelectorAll<HTMLButtonElement>('#catalogo [data-filtro]')
+  );
+  const filas = Array.from(document.querySelectorAll<HTMLElement>('#catalogo .ficha-item'));
+  const estadoVacio = document.getElementById('estado-vacio');
+
+  function aplicarFiltro(tueste: string | null): void {
+    let visibles = 0;
+    for (const fila of filas) {
+      const visible = tueste === null || fila.dataset.tueste === tueste;
+      fila.hidden = !visible;
+      if (visible) visibles += 1;
+    }
+    if (estadoVacio) estadoVacio.hidden = visibles > 0;
+  }
+
+  for (const boton of botonesFiltro) {
+    boton.addEventListener('click', () => {
+      const tueste = boton.dataset.filtro || null;
+      for (const otro of botonesFiltro) {
+        otro.setAttribute('aria-pressed', String(otro === boton));
+      }
+      aplicarFiltro(tueste);
+    });
+  }
+
+  // --- "Agregar": pick the product in the order form, then scroll + focus ---
+  const catalogo = document.getElementById('catalogo');
+  const reducirMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  catalogo?.addEventListener('click', (event) => {
+    const objetivo = event.target as HTMLElement;
+    const botonAgregar = objetivo.closest<HTMLButtonElement>('[data-producto]');
+    if (!botonAgregar) return;
+
+    const selectProducto = document.getElementById('producto') as HTMLSelectElement | null;
+    const grano = botonAgregar.dataset.producto;
+    if (selectProducto && grano) {
+      selectProducto.value = grano;
+    }
+
+    const seccionPedido = document.getElementById('pedido');
+    if (seccionPedido) {
+      seccionPedido.scrollIntoView({ behavior: reducirMovimiento ? 'auto' : 'smooth' });
+      seccionPedido.focus({ preventScroll: true });
+    }
+  });
+</script>
+
+<style>
+  .catalogo {
+    max-width: 72rem;
+    margin-inline: auto;
+    padding: 4rem 1.25rem;
+  }
+
+  .catalogo-titulo {
+    font-size: clamp(1.75rem, 3vw + 0.75rem, 2.5rem);
+    margin: 0;
+  }
+
+  .catalogo-intro {
+    margin: 0.25rem 0 0;
+  }
+
+  .filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-block: 1.5rem 2.5rem;
+  }
+
+  .filtro {
+    background-color: transparent;
+    border: 1px solid var(--color-pulpa);
+    border-radius: 999px;
+    color: var(--color-bosque);
+    font-weight: 600;
+    padding: 0.375rem 1.125rem;
+    cursor: pointer;
+  }
+
+  .filtro:hover {
+    border-color: var(--color-bosque);
+  }
+
+  .filtro[aria-pressed='true'] {
+    background-color: var(--color-yema);
+    border-color: var(--color-yema);
+    color: var(--color-bosque);
+  }
+
+  .estado-vacio {
+    border: 1px dashed var(--color-cereza);
+    border-radius: 6px;
+    color: var(--color-cereza);
+    padding: 1rem;
+    margin-block-end: 1.5rem;
+  }
+
+  .fichas {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-block-end: 1px solid var(--color-pulpa);
+  }
+</style>

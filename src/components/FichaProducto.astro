@@ -1,0 +1,120 @@
+---
+// One row of the "cupping ledger": a flat, hairline-separated entry,
+// deliberately not a rounded shadowed card.
+import type { Producto } from '../data/productos';
+
+interface Props {
+  producto: Producto;
+}
+
+const { producto } = Astro.props;
+
+const formatoPrecio = new Intl.NumberFormat('es-CO', {
+  style: 'currency',
+  currency: 'COP',
+  maximumFractionDigits: 0,
+});
+---
+
+<article class="ficha">
+  <div class="ficha-cabecera">
+    <span class="medidor" role="img" aria-label={`Intensidad ${producto.intensidad} de 5`}>
+      {Array.from({ length: 5 }, (_, i) => (
+        <span
+          class:list={['medidor-seg', i < producto.intensidad && 'medidor-seg--lleno']}
+          aria-hidden="true"
+        />
+      ))}
+    </span>
+    <span class="ficha-altitud">{producto.altitud} m</span>
+  </div>
+
+  <h3 class="ficha-nombre">{producto.nombre}</h3>
+
+  <p class="ficha-notas">{producto.notas.join(' · ')}</p>
+
+  <div class="ficha-pie">
+    <p class="ficha-precio">
+      {producto.peso} · {formatoPrecio.format(producto.precio)}
+    </p>
+    <button class="ficha-agregar" type="button" data-producto={producto.id}>Agregar</button>
+  </div>
+</article>
+
+<style>
+  .ficha {
+    display: grid;
+    gap: 0.375rem;
+    padding-block: 1.5rem;
+    border-block-start: 1px solid var(--color-pulpa);
+  }
+
+  .ficha-cabecera {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .medidor {
+    display: inline-flex;
+    gap: 0.3rem;
+  }
+
+  .medidor-seg {
+    width: 1.1rem;
+    height: 0.4rem;
+    border-radius: 2px;
+    background-color: var(--color-flor);
+    border: 1px solid var(--color-pulpa);
+  }
+
+  .medidor-seg--lleno {
+    background-color: var(--color-yema);
+    border-color: var(--color-yema);
+  }
+
+  .ficha-altitud {
+    font-size: 0.875rem;
+    color: var(--color-bosque);
+  }
+
+  .ficha-nombre {
+    font-size: 1.375rem;
+    margin: 0;
+  }
+
+  .ficha-notas {
+    margin: 0;
+    color: var(--color-bosque);
+    font-style: italic;
+  }
+
+  .ficha-pie {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    margin-block-start: 0.5rem;
+  }
+
+  .ficha-precio {
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .ficha-agregar {
+    background-color: var(--color-flor);
+    border: 1px solid var(--color-bosque);
+    border-radius: 5px;
+    color: var(--color-bosque);
+    font-weight: 600;
+    padding: 0.5rem 1.25rem;
+    cursor: pointer;
+  }
+
+  .ficha-agregar:hover {
+    background-color: var(--color-yema);
+    border-color: var(--color-yema);
+  }
+</style>

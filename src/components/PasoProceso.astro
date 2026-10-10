@@ -1,0 +1,40 @@
+---
+// One expandable node of the origin sequence.
+// Native <details>/<summary>: opens and closes with Enter/Space — no JS involved.
+import type { PasoProceso as Paso } from '../data/proceso';
+
+interface Props {
+  paso: Paso;
+  indice: number;
+}
+
+const { paso, indice } = Astro.props;
+---
+
+<details class="paso">
+  <summary>
+    <span class="paso-numero">{indice}.</span> {paso.titulo}
+  </summary>
+  <p>{paso.texto}</p>
+</details>
+
+<style>
+  .paso summary {
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 1.1875rem;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .paso-numero {
+    color: var(--color-yema);
+    display: inline-block;
+    min-width: 1.75rem;
+  }
+
+  .paso p {
+    margin: 0.5rem 0 1rem 1.75rem;
+    max-width: 65ch;
+  }
+</style>
